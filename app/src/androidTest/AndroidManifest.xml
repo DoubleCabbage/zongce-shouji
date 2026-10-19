@@ -1,0 +1,6 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <provider android:name="cn.activityscore.app.tests.EvidenceFixtureProvider"
+            android:authorities="cn.activityscore.app.test.evidence-fixture" android:exported="true" />
+    </application>
+</manifest>
