@@ -13,6 +13,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import cn.activityscore.app.data.*
@@ -32,7 +33,7 @@ internal object JournalSpace { val gutter = 24.dp; val section = 24.dp; val gap 
 
 @Composable internal fun JournalTopBar(tab: Int, year: Int, onYear: (Int) -> Unit, onMore: () -> Unit, onAdd: () -> Unit) {
     val largeText = androidx.compose.ui.platform.LocalDensity.current.fontScale > 1.4f
-    val title = when (tab) { 0 -> "拾光"; 2 -> "活动"; 3 -> "申报学年"; 1 -> "历史评分"; else -> "更多与资料" }
+    val title = when (tab) { 0 -> stringResource(R.string.app_name); 2 -> "活动"; 3 -> "申报学年"; 1 -> "历史评分"; else -> "更多与资料" }
     @Composable fun Action() {
         if (tab == 2) TextButton(onClick = onAdd, contentPadding = PaddingValues(8.dp)) {
             Icon(JournalIcons.plus, null, Modifier.size(18.dp)); Text("新增")

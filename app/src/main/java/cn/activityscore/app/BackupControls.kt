@@ -9,6 +9,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import cn.activityscore.app.data.*
@@ -22,6 +23,7 @@ import kotlinx.coroutines.withContext
 @Composable
 fun BackupControls(store: RecordStore, entryVisible: Boolean = true, blocked: Boolean = false, restoreBlocked: Boolean = false, onEvidenceProblems: () -> Unit = {}, onRestored: () -> Unit) {
     val context = LocalContext.current.applicationContext
+    val appName = stringResource(R.string.app_name)
     val scope = rememberCoroutineScope()
     var showMenu by remember { mutableStateOf(false) }
     var busy by remember { mutableStateOf(false) }
@@ -80,7 +82,7 @@ fun BackupControls(store: RecordStore, entryVisible: Boolean = true, blocked: Bo
                         withContext(Dispatchers.IO) { captured = FullBackup.capture(context, store, cancellation) { progress = it } }
                         pendingFile = captured; captured = null
                         progress = "请选择备份保存位置…"
-                        savePicker.launch("素养分完整备份-${System.currentTimeMillis()}.zip")
+                        savePicker.launch("$appName-完整备份-${System.currentTimeMillis()}.zip")
                     } catch (error: Exception) {
                         if (error is EvidenceProblems) { result = ""; onEvidenceProblems() }
                         else result = "备份未完成：${dataErrorMessage(error)}"
